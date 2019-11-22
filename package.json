@@ -1,0 +1,19 @@
+{
+  "name": "mut-obs",
+  "version": "0.0.0",
+  "description": "TBD",
+  "main": "mut-obs.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bahrus/mut-obs.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bahrus/mut-obs/issues"
+  },
+  "homepage": "https://github.com/bahrus/mut-obs#readme"
+}
