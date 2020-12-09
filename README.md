@@ -1,6 +1,12 @@
 # mut-obs
 
-mut-obs is a web component wrapper around the mutation observor, resize observer, 
+mut-obs is a web component wrapper around the mutation observer
 
-<any-element></any-element>
-<mut-obs observe -config -transform insert-results></mut-obs>
+```html
+<mut-obs -observe -scope -attributes -child-list -sub-tree -css-filter-test></mut-obs>
+```
+
+scope = previousElement, shadowRoot, parent, 
+
+
+
