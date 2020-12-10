@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id=myDiv></div>
+    <mut-obs id=mutObj observe=* attributes on=[my-attribute] dispatch="my-event"></mut-obs>
+    <button type=button onclick="myDiv.setAttribute('my-attribute', 'hello')">Click</button>
+    <script type=module src="../mut-obs.js"></script>
+    <script>
+        mutObj.addEventListener('my-event', e => {
+            console.log(e);
+        })
+    </script>
+</body>
+</html>
