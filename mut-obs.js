@@ -6,13 +6,14 @@ export function upSearch(el, css) {
     return upEl;
 }
 export class MutObs extends HTMLElement {
+    #observer;
     connectedCallback() {
         this.style.display = 'none';
         const g = this.getAttribute.bind(this);
         const h = this.hasAttribute.bind(this);
         const elToObserve = upSearch(this, g('observe'));
         const config = {
-            attributeFilter: g('attr-filter') !== null ? JSON.parse(g('attr-filter')) : undefined,
+            attributeFilter: g('attribute-filter') !== null ? JSON.parse(g('attribute-filter')) : undefined,
             attributes: h('attributes'),
             childList: h('child-list'),
             subtree: h('subtree'),
@@ -20,19 +21,19 @@ export class MutObs extends HTMLElement {
             characterData: h('character-data'),
             characterDataOldValue: h('character-data-old-value')
         };
-        this._observer = new MutationObserver((mutRec) => {
+        this.#observer = new MutationObserver((mutRecords) => {
             if (elToObserve?.matches(g('on'))) {
                 this.dispatchEvent(new CustomEvent(g('dispatch'), {
                     bubbles: h('bubbles'),
                     composed: h('composed'),
                     cancelable: h('cancelable'),
                     detail: {
-                        mutRec
+                        mutRec: mutRecords
                     }
                 }));
             }
         });
-        this._observer.observe(elToObserve, config);
+        this.#observer.observe(elToObserve, config);
         this.dispatchEvent(new CustomEvent('watching-for-' + g('dispatch'), {
             bubbles: h('bubbles'),
             composed: h('composed'),
@@ -40,7 +41,7 @@ export class MutObs extends HTMLElement {
         }));
     }
     disconnectedCallback() {
-        this._observer?.disconnect();
+        this.#observer?.disconnect();
     }
 }
 const is = 'mut-obs';

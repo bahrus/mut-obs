@@ -25,4 +25,10 @@ Event "my-element-mutates" will be fired when mutations occur.
 
 Another event, "watching-for-my-element-mutates" is fired the moment mutation observation begins.
 
+## Resize observing
+
+Observing an element's children isn't the end of what can be observed.  The resizeobserver api allows for monitoring the size of the element.  
+
+
+
 
