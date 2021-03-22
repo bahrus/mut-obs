@@ -12,7 +12,7 @@ on is a required css selector.  The added or removed node is tested with this at
 
 If the test fails, nothing happens.  If it passes...
 
-"dispatch" is the required name of the event to fire if the "on" test passes. An "is-active" event is also fired, where is-active is append to the dispatch name.
+"dispatch" is the required name of the event to fire if the "on" test passes. An "is-active" event is also fired, where is-active is appended to the dispatch name.
 
 For example:
 
@@ -25,9 +25,6 @@ Event "my-element-mutates" will be fired when mutations occur.
 
 Another event, "watching-for-my-element-mutates" is fired the moment mutation observation begins.
 
-## Resize observing
-
-Observing an element's children isn't the end of what can be observed.  The resizeobserver api allows for monitoring the size of the element.  
 
 
 
