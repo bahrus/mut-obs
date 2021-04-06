@@ -3,16 +3,16 @@
 mut-obs is a web component wrapper around the mutation observer
 
 ```html
-<mut-obs -observe -attributes -attr-filter -child-list -subtree -on -dispatch -bubbles -composed></mut-obs>
+<mut-obs -observe -attributes -attr-filter -child-list -subtree -on -dispatch -unmatch-dispatch -bubbles -composed -cancelable></mut-obs>
 ```
 
-observe is a required css selector that "up searches" -- it searches / matches previous siblings, then parent, then previous sibling parents, etc., stopping at shadowDOM boundary.
+observe is a required css selector that "up searches" -- it searches for a css match on its previous siblings, then parent, then previous sibling parents, etc., stopping at shadowDOM boundary.  The mutation observer is applied to that element, based on "attributes", "attr-filter", "child-list", "subtree" attributes.
 
 on is a required css selector.  The added or removed node is tested with this attribute using the matches() method. 
 
-If the test fails, nothing happens.  If it passes...
+If the test fails, nothing happens (unless unmatch-dispatch is set).  If it passes...
 
-"dispatch" is the required name of the event to fire if the "on" test passes. An "is-active" event is also fired, where is-active is appended to the dispatch name.
+"dispatch" is the name of the event to fire if the "on" test passes. 
 
 For example:
 
