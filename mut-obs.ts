@@ -65,7 +65,7 @@ export class MutObs extends HTMLElement{
                                     composed,
                                     cancelable,
                                     detail: {
-                                        match: elToObserve
+                                        match: node
                                     }
                                 }));
                             }else if(unmatchDispatch !== null){
