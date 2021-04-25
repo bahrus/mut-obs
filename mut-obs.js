@@ -84,7 +84,7 @@ export class MutObs extends HTMLElement {
                         });
                         break;
                 }
-                console.log(mutRecord);
+                //console.log(mutRecord);
                 //mutRecord.addedNodes
             }
         });
