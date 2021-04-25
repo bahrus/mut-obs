@@ -1,17 +1,33 @@
 {
   "name": "mut-obs",
   "version": "0.0.6",
-  "description": "TBD",
+  "keywords": [
+    "Web Components",
+    "Custom Elements"
+  ],
+  "description": "Web component wrapper around the mutation observer",
   "main": "mut-obs.js",
+  "module": "mut-obs.js",
+  "exports": {
+    ".": "./mut-obs.js",
+    "./mut-obs.js": "./mut-obs.js"
+  },
+  "files": [
+    "mut-obs.*",
+    "types.d.ts"
+  ],
+  "types": "types.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "serve": "node node_modules/xtal-test/serve.js",
+    "package-check": "package-check",
     "compress": "terser --compress --mangle -- mut-obs.js > dist/mut-obs.min.js"
   },
   "dependencies": {
     "p-et-alia": "0.0.71"
   },
   "devDependencies": {
+    "@skypack/package-check": "0.2.2",
     "terser": "5.5.1",
     "xtal-test": "0.0.48"
   },
