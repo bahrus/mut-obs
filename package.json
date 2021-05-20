@@ -23,13 +23,10 @@
     "package-check": "package-check",
     "compress": "terser --compress --mangle -- mut-obs.js > dist/mut-obs.min.js"
   },
-  "dependencies": {
-    "p-et-alia": "0.0.71"
-  },
   "devDependencies": {
     "@skypack/package-check": "0.2.2",
-    "terser": "5.5.1",
-    "xtal-test": "0.0.48"
+    "terser": "5.7.0",
+    "xtal-test": "0.0.50"
   },
   "repository": {
     "type": "git",
