@@ -62,14 +62,16 @@ export class MutObs extends HTMLElement {
                         mutRecord.addedNodes.forEach(node => {
                             if (node instanceof HTMLElement) {
                                 const matches = node.matches(on);
-                                this.dispatchEvent(new CustomEvent(dispatch, {
-                                    bubbles,
-                                    composed,
-                                    cancelable,
-                                    detail: {
-                                        match: node
-                                    }
-                                }));
+                                if (matches) {
+                                    this.dispatchEvent(new CustomEvent(dispatch, {
+                                        bubbles,
+                                        composed,
+                                        cancelable,
+                                        detail: {
+                                            match: node
+                                        }
+                                    }));
+                                }
                             }
                             else if (unmatchDispatch !== null) {
                                 this.dispatchEvent(new CustomEvent(unmatchDispatch, {
