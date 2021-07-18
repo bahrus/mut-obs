@@ -25,7 +25,7 @@ Event "my-element-mutates" will be fired when mutations occur.
 
 Another event, "watching-for-my-element-mutates" is fired the moment mutation observation begins.
 
-
+[TODO] Find a way to consolidate multiple mut-obs's into one.
 
 
 
