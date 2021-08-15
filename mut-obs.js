@@ -1,3 +1,17 @@
+var __classPrivateFieldSet = (this && this.__classPrivateFieldSet) || function (receiver, privateMap, value) {
+    if (!privateMap.has(receiver)) {
+        throw new TypeError("attempted to set private field on non-instance");
+    }
+    privateMap.set(receiver, value);
+    return value;
+};
+var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (receiver, privateMap) {
+    if (!privateMap.has(receiver)) {
+        throw new TypeError("attempted to get private field on non-instance");
+    }
+    return privateMap.get(receiver);
+};
+var _observer;
 export function upSearch(el, css) {
     if (css === 'parentElement')
         return el.parentElement;
@@ -8,7 +22,10 @@ export function upSearch(el, css) {
     return upEl;
 }
 export class MutObs extends HTMLElement {
-    #observer;
+    constructor() {
+        super(...arguments);
+        _observer.set(this, void 0);
+    }
     connectedCallback() {
         this.style.display = 'none';
         const g = this.getAttribute.bind(this);
@@ -31,7 +48,7 @@ export class MutObs extends HTMLElement {
         const unmatchDispatch = g('unmatch-dispatch');
         const on = g('on');
         const dispatch = g('dispatch');
-        this.#observer = new MutationObserver((mutRecords) => {
+        __classPrivateFieldSet(this, _observer, new MutationObserver((mutRecords) => {
             for (const mutRecord of mutRecords) {
                 switch (mutRecord.type) {
                     case 'characterData':
@@ -89,8 +106,8 @@ export class MutObs extends HTMLElement {
                 //console.log(mutRecord);
                 //mutRecord.addedNodes
             }
-        });
-        this.#observer.observe(elToObserve, config);
+        }));
+        __classPrivateFieldGet(this, _observer).observe(elToObserve, config);
         this.dispatchEvent(new CustomEvent('watching-for-' + g('dispatch'), {
             bubbles: h('bubbles'),
             composed: h('composed'),
@@ -98,9 +115,11 @@ export class MutObs extends HTMLElement {
         }));
     }
     disconnectedCallback() {
-        this.#observer?.disconnect();
+        var _a;
+        (_a = __classPrivateFieldGet(this, _observer)) === null || _a === void 0 ? void 0 : _a.disconnect();
     }
 }
+_observer = new WeakMap();
 const is = 'mut-obs';
 if (!customElements.get(is))
     customElements.define(is, MutObs);
