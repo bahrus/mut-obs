@@ -1,5 +1,9 @@
 # mut-obs
 
+<a href="https://nodei.co/npm/mut-obs/"><img src="https://nodei.co/npm/mut-obs.png"></a>
+
+<img src="https://badgen.net/bundlephobia/minzip/mut-obs@0.0.10">
+
 mut-obs is a web component wrapper around the mutation observer
 
 ```html

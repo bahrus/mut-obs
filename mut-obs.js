@@ -1,17 +1,15 @@
-var __classPrivateFieldSet = (this && this.__classPrivateFieldSet) || function (receiver, privateMap, value) {
-    if (!privateMap.has(receiver)) {
-        throw new TypeError("attempted to set private field on non-instance");
-    }
-    privateMap.set(receiver, value);
-    return value;
+var __classPrivateFieldSet = (this && this.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
+    if (kind === "m") throw new TypeError("Private method is not writable");
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
+    return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
 };
-var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (receiver, privateMap) {
-    if (!privateMap.has(receiver)) {
-        throw new TypeError("attempted to get private field on non-instance");
-    }
-    return privateMap.get(receiver);
+var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (receiver, state, kind, f) {
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
+    return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
-var _observer;
+var _MutObs_observer;
 export function upSearch(el, css) {
     if (css === 'parentElement')
         return el.parentElement;
@@ -24,7 +22,7 @@ export function upSearch(el, css) {
 export class MutObs extends HTMLElement {
     constructor() {
         super(...arguments);
-        _observer.set(this, void 0);
+        _MutObs_observer.set(this, void 0);
     }
     connectedCallback() {
         this.style.display = 'none';
@@ -48,7 +46,7 @@ export class MutObs extends HTMLElement {
         const unmatchDispatch = g('unmatch-dispatch');
         const on = g('on');
         const dispatch = g('dispatch');
-        __classPrivateFieldSet(this, _observer, new MutationObserver((mutRecords) => {
+        __classPrivateFieldSet(this, _MutObs_observer, new MutationObserver((mutRecords) => {
             for (const mutRecord of mutRecords) {
                 switch (mutRecord.type) {
                     case 'characterData':
@@ -106,8 +104,8 @@ export class MutObs extends HTMLElement {
                 //console.log(mutRecord);
                 //mutRecord.addedNodes
             }
-        }));
-        __classPrivateFieldGet(this, _observer).observe(elToObserve, config);
+        }), "f");
+        __classPrivateFieldGet(this, _MutObs_observer, "f").observe(elToObserve, config);
         this.dispatchEvent(new CustomEvent('watching-for-' + g('dispatch'), {
             bubbles: h('bubbles'),
             composed: h('composed'),
@@ -116,10 +114,10 @@ export class MutObs extends HTMLElement {
     }
     disconnectedCallback() {
         var _a;
-        (_a = __classPrivateFieldGet(this, _observer)) === null || _a === void 0 ? void 0 : _a.disconnect();
+        (_a = __classPrivateFieldGet(this, _MutObs_observer, "f")) === null || _a === void 0 ? void 0 : _a.disconnect();
     }
 }
-_observer = new WeakMap();
+_MutObs_observer = new WeakMap();
 const is = 'mut-obs';
 if (!customElements.get(is))
     customElements.define(is, MutObs);
